@@ -1,0 +1,22 @@
+.banner {
+  background-color: #2980B9;
+  color: white; }
+  .banner h2 {
+    padding-top: 1.5em;
+    padding-bottom: .1em; }
+  .banner button {
+    margin-bottom: 2em; }
+
+.panel {
+  margin-top: 2em;
+  margin-bottom: 2em; }
+  .panel li {
+    background-color: #2980B9;
+    color: white;
+    padding: .7em;
+    border-radius: 10px;
+    margin: .5em; }
+
+#footer {
+  background-color: #D3D3D3;
+  margin-bottom: 0; }
