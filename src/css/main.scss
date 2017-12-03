@@ -5,8 +5,11 @@ $blue: #2980B9;
   h2 {
     padding:{
      top: 1.5em;
-     bottom: .1em;
+     bottom: .3em;
   }
+ }
+ p {
+   font-size: 14px;
  }
   button{
     margin-bottom: 2em;
@@ -24,6 +27,7 @@ $blue: #2980B9;
     border-radius: 10px;
     margin: .5em;
   }
+  height: 48vh;
 }
 #footer{
   background-color: #D3D3D3;

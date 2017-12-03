@@ -3,13 +3,16 @@
   color: white; }
   .banner h2 {
     padding-top: 1.5em;
-    padding-bottom: .1em; }
+    padding-bottom: .3em; }
+  .banner p {
+    font-size: 14px; }
   .banner button {
     margin-bottom: 2em; }
 
 .panel {
   margin-top: 2em;
-  margin-bottom: 2em; }
+  margin-bottom: 2em;
+  height: 45vh; }
   .panel li {
     background-color: #2980B9;
     color: white;
