@@ -6,24 +6,30 @@ html, body {
   overflow-x: hidden; }
 
 .active a {
-  color: blue; }
+  background-color: grey !important; }
 
 .banner {
   background-color: #2980B9;
   color: white; }
   .banner h2 {
     font-size: 2.5em;
+    font-family: 'Spectral SC', serif;
     padding-top: 1.5em;
     padding-bottom: .1em; }
   .banner p {
-    font-size: 1.3em; }
+    font-size: 1.3em;
+    font-family: 'Open Sans Condensed', sans-serif; }
   .banner button {
     margin-bottom: 2em; }
+
+.card-default {
+  color: white;
+  background-color: #2980B9 !important; }
 
 .panel {
   margin-top: 2em;
   margin-bottom: 2em;
-  height: 44vh; }
+  height: 44.5vh; }
   .panel li {
     background-color: #2980B9;
     color: white;
@@ -34,7 +40,8 @@ html, body {
 #footer {
   background-color: #444;
   margin-bottom: 0;
-  font-size: 1.1em;
+  font-size: 1.09em;
+  font-family: 'Open Sans Condensed', sans-serif;
   color: white; }
   #footer #icon {
     color: #2980B9; }
