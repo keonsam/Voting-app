@@ -7,9 +7,9 @@ export class Body extends React.Component{
   render() {
     return(
       <div className="row panel">
-      <div className="col-2">
+      <div className="col-1">
        </div>
-       <div className="col-8">
+       <div className="col-10">
        <div className="card">
        <div className="card-header card-default">
         <h3>Recent Poll</h3>
@@ -23,7 +23,7 @@ export class Body extends React.Component{
        </div>
       </div>
     </div>
-    <div className="col-2">
+    <div className="col-1">
     </div>
     </div>
     );

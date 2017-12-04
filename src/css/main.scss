@@ -8,22 +8,38 @@ html,body
     padding: 0px;
     overflow-x: hidden;
 }
+.active{
+   a {
+  background-color: grey !important;
+ }
+}
 
 .banner{
   background-color: $blue;
   color: white;
   h2 {
+    font:{
+    size: 2.5em;
+    family: 'Spectral SC', serif;
+  }
     padding:{
      top: 1.5em;
-     bottom: .3em;
+     bottom: .1em;
   }
  }
  p {
-   font-size: 14px;
+   font:{
+     size: 1.3em;
+     family: 'Open Sans Condensed', sans-serif;
+   }
  }
   button{
     margin-bottom: 2em;
   }
+}
+.card-default{
+  color: white;
+  background-color: $blue !important;
 }
 .panel {
   margin:{
@@ -35,11 +51,19 @@ html,body
     color: white;
     padding: .7em;
     border-radius: 10px;
-    margin: .5em;
+    margin: .3em;
   }
-  height: 48vh;
+  height: 44.5vh;
 }
 #footer{
-  background-color: #D3D3D3;
+  background-color: #444;
   margin-bottom: 0;
+  font:{
+    size: 1.09em;
+    family: 'Open Sans Condensed', sans-serif;
+  }
+  color: white;
+  #icon {
+    color: $blue;
+  }
 }

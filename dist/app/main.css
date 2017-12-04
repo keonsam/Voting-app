@@ -1,29 +1,40 @@
-#app {
-  margin-left: 0;
-  margin-right: -20px; }
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden; }
+
+.active a {
+  color: blue; }
 
 .banner {
   background-color: #2980B9;
   color: white; }
   .banner h2 {
+    font-size: 2.5em;
     padding-top: 1.5em;
-    padding-bottom: .3em; }
+    padding-bottom: .1em; }
   .banner p {
-    font-size: 14px; }
+    font-size: 1.3em; }
   .banner button {
     margin-bottom: 2em; }
 
 .panel {
   margin-top: 2em;
   margin-bottom: 2em;
-  height: 48vh; }
+  height: 44vh; }
   .panel li {
     background-color: #2980B9;
     color: white;
     padding: .7em;
     border-radius: 10px;
-    margin: .5em; }
+    margin: .3em; }
 
 #footer {
-  background-color: #D3D3D3;
-  margin-bottom: 0; }
+  background-color: #444;
+  margin-bottom: 0;
+  font-size: 1.1em;
+  color: white; }
+  #footer #icon {
+    color: #2980B9; }
