@@ -38,6 +38,25 @@ html, body {
     border-radius: 10px;
     margin: .3em; }
 
+.signup {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 45vh; }
+
+form input {
+  width: 100%;
+  margin-top: -5px;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px; }
+
+form label {
+  margin-top: 5px; }
+
+form button {
+  margin-top: 15px;
+  width: 30%; }
+
 #footer {
   background-color: #444;
   margin-bottom: 0;
