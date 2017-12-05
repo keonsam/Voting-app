@@ -5,8 +5,9 @@ html, body {
   padding: 0px;
   overflow-x: hidden; }
 
-.active a {
-  background-color: grey !important; }
+.activeNav {
+  color: #555 !important;
+  background-color: #e7e7e7 !important; }
 
 .banner {
   background-color: #2980B9;

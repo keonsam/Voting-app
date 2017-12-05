@@ -22,16 +22,16 @@ export class App extends React.Component{
   <NavLink className="navbar-brand" to="/">Votex</NavLink>
   <div className="collapse navbar-collapse" id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
-      <li className="nav-item active">
-        <NavLink className="nav-link home" to="/" >Home<span className="sr-only">(current)</span></NavLink>
+      <li className="nav-item ">
+        <NavLink className="nav-link home" to="/" exact activeClassName="activeNav" >Home</NavLink>
       </li>
       </ul>
      <ul className="navbar-nav ml-auto">
       <li className="nav-item">
-        <NavLink className="nav-link" to="/Signup">Signup</NavLink>
+        <NavLink className="nav-link" to="/Signup" activeClassName="activeNav">Signup</NavLink>
       </li>
       <li className="nav-item">
-        <NavLink className="nav-link" to="/Login">Login</NavLink>
+        <NavLink className="nav-link" to="/Login" activeClassName="activeNav">Login</NavLink>
       </li>
     </ul>
   </div>
