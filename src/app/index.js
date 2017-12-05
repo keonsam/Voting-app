@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 
 import '../css/main.scss';
 
@@ -18,7 +18,7 @@ class App extends React.Component{
   }
   render() {
     return(
-      <Router>
+      <HashRouter>
       <div className="container-fluid p-0">
         <Header />
         <Banner/>
@@ -27,7 +27,7 @@ class App extends React.Component{
         <Route path="/Login" component={Login}/>
         <Footer/>
       </div>
-  </Router>
+  </HashRouter>
     );
   }
 }
