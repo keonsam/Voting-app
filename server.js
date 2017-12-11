@@ -8,6 +8,11 @@ const mongoose = require('mongoose');
 
 const VIEWS = path.join(__dirname, '/dist');
 
+app.use(express.static(VIEWS));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '/dist', 'index.html'));
+});
 
 app.listen(process.env.PORT || 3000, ()=>{
   console.log('server is working');
