@@ -3,6 +3,10 @@ import React from "react";
 export class Login extends React.Component{
   constructor(props){
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(e) {
+    e.preventDefault();
   }
   render() {
     return(
@@ -11,7 +15,7 @@ export class Login extends React.Component{
        <div className="col-1">
        </div>
        <div className="col-10">
-          <form method="post" action="../form">
+          <form method="post" action="../login" onSubmit={this.handleSubmit}>
            <label htmlFor="Enter Email">Email:</label>
            <input name="eml" type="text" />
            <label htmlFor="Enter Pass">Password:</label>
