@@ -1,12 +1,40 @@
 import React from "react";
+import { Redirect} from "react-router-dom";
+
+import {signup} from "../utils/api.js";
 
 export class Signup extends React.Component{
   constructor(props){
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      userName: '',
+      userEmail: '',
+      password: '',
+      error: false,
+      triggerRedirect: false
+    }
+    this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-  handleSubmit(e) {
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+  onSubmit(e) {
     e.preventDefault()
+    signup(this.state.userName, this.state.userEmail, this.state.password, (res) => {
+      console.log(res)
+      if(res == true) {
+        this.setState({
+          triggerRedirect: true
+        });
+      }else {
+        this.setState({
+          error: res
+        });
+      }
+    });
   }
   render() {
     return(
@@ -15,14 +43,16 @@ export class Signup extends React.Component{
      <div className="col-1">
      </div>
      <div className="col-10">
-        <form method="post" action="../signup" onSubmit={this.handleSubmit}>
+        <form onSubmit={this.onSubmit}>
          <label htmlFor="Enter Name">Name:</label>
-         <input name="str" type="text" required/>
+         <input name="userName" type="text" onChange={this.handleChange} value={this.state.userName} required/>
          <label htmlFor="Enter Email">Email:</label>
-         <input name="eml" type="text" required/>
+         <input name="userEmail" type="text" onChange={this.handleChange} value={this.state.userEmail} required/>
          <label htmlFor="Enter Pass">Password:</label>
-         <input name="pass" type="password" required/>
-         <button className="btn btn-success" type="signup">Sign Up</button>
+         <input name="password" type="password" onChange={this.handleChange} value={this.state.password} required/>
+         {this.state.error && <p id="error">{this.state.error}</p>}
+         <button className="btn btn-success" type="sumbit">Sign Up</button>
+         { this.state.triggerRedirect && <Redirect to="/" /> }
         </form>
      </div>
      <div className="col-1">

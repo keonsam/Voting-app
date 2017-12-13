@@ -22,37 +22,38 @@ app.get('/', (req, res) => {
 });
 
 app.post('/signup', (req, res) => {
-  const userName = req.body.str;
-  const userEmail = req.body.eml;
-  const password = req.body.pass;
-  account.findOne({ userEmail: req.body.eml }, (err, doc) =>{
-    if(err) return res.send(err);
+  const userName = req.body.userName;
+  const userEmail = req.body.userEmail;
+  const password = req.body.password;
+  account.findOne({ userEmail: req.body.userEmail }, (err, doc) =>{
+    if(err) return res.send("database is down please try again later.");
     if(doc){
-      console.log("already saved");
-    }
-  });
+      return res.send("Email already existed.");
+    }else {
  const data = new account({
    userName,
    userEmail,
    password
  });
  data.save(err =>{
- if(err) console.log('Error Saving to Database');
+ if(err) return res.send("error saving to database.");
+});
+  return res.send(true);
+}
 });
 });
 
 app.post('/login', (req, res) => {
-  let loginName;
-  let loginEmail;
-  let loginPassword;
-  account.findOne({ userEmail: req.body.eml }, (err, doc) =>{
-    if(err) return res.send(err);
+  account.findOne({ userEmail: req.body.userEmail }, (err, doc) =>{
+    if(err) return res.send("database is down.");
     if (!doc) {
-      res.send("do not exist");
+      res.send("User not found please Sign up.");
     }
     if(doc){
-      if(doc.password = req.body.pass){
-        res.send("great programmer");
+      if(doc.password == req.body.password){
+        res.send(true);
+      }else {
+        res.send("password is incorrect, please try again.")
       }
     }
   });

@@ -1,12 +1,41 @@
 import React from "react";
+import { Redirect} from "react-router-dom";
+
+import { login } from "../utils/api.js";
 
 export class Login extends React.Component{
   constructor(props){
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      userEmail: '',
+      password: '',
+      error: false,
+      triggerRedirect: false
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
-  handleSubmit(e) {
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  onSubmit(e) {
     e.preventDefault();
+    console.log('res');
+    login(this.state.userEmail, this.state.password, (res) => {
+      if(res == true) {
+        this.setState({
+          triggerRedirect: true
+        });
+      }else {
+        this.setState({
+          error: res
+        });
+      }
+    });
   }
   render() {
     return(
@@ -15,12 +44,14 @@ export class Login extends React.Component{
        <div className="col-1">
        </div>
        <div className="col-10">
-          <form method="post" action="../login" onSubmit={this.handleSubmit}>
+          <form onSubmit={this.onSubmit}>
            <label htmlFor="Enter Email">Email:</label>
-           <input name="eml" type="text" />
+           <input name="userEmail" type="text" onChange={this.handleChange} value={this.state.userEmail}/>
            <label htmlFor="Enter Pass">Password:</label>
-           <input name="pass" type="password" />
-           <button className="btn btn-success" type="login">Log In</button>
+           <input name="password" type="password" onChange={this.handleChange} value={this.state.password}/>
+            {this.state.error && <p id="error">{this.state.error}</p>}
+           <button className="btn btn-success" type="submit">Log In</button>
+           { this.state.triggerRedirect && <Redirect to="/" /> }
           </form>
        </div>
        <div className="col-1">
