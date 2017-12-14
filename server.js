@@ -36,8 +36,9 @@ app.use(passport.session());
 app.use(express.static(VIEWS));
 
 passport.use(new LocalStrategy(
-  function(userEmail, password, done) {
-   account.findOne({ userEmail: userEmail }, (err, doc) =>{
+  {usernameField:"userEmail"},
+  function(username, password, done) {
+   account.findOne({ userEmail: username }, (err, doc) =>{
       if(err) return done(err);
       if (!doc) {
       return done(null, false, { message: 'Incorrect username.' });
@@ -46,7 +47,7 @@ passport.use(new LocalStrategy(
     if(doc){
       bcrypt.compare(password, doc.password, (err, res) =>{
         if(res == true) {
-          return done(null, {name: doc.userName, email: doc.userEmail})
+          return done(null, doc)
         }else {
         return done(null, false, { message: 'Incorrect password.' });
         }
@@ -86,7 +87,8 @@ app.post('/signup', (req, res) => {
 });
 });
 
-app.post('/login', passport.authenticate('local'),(req, res) => {
+app.post('/login', passport.authenticate('local', { failureRedirect: '/' }),(req, res) => {
+  console.log(req.message);
    res.json(true);
 });
 

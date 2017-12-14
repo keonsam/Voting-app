@@ -24,7 +24,6 @@ export class Signup extends React.Component{
   onSubmit(e) {
     e.preventDefault()
     signup(this.state.userName, this.state.userEmail, this.state.password, (res) => {
-      console.log(res)
       if(res == true) {
         this.setState({
           triggerRedirect: true
