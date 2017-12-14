@@ -6,6 +6,15 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+// auth packages
+const session = require('express-session');
+const passport = require('passport');
+const MongoStore = require('connect-mongo')(session);
+const LocalStrategy = require('passport-local').Strategy;
+//password hash
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const account = require('./models/accounts');
 
 const VIEWS = path.join(__dirname, '/dist');
@@ -15,7 +24,37 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://voting:voting@ds143362.mlab
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+  secret: 'aszcdfrdkgvnreqqdnk',
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ url: 'mongodb://voting:voting@ds143362.mlab.com:43362/votingapp'})
+  //cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(VIEWS));
+
+passport.use(new LocalStrategy(
+  function(userEmail, password, done) {
+   account.findOne({ userEmail: userEmail }, (err, doc) =>{
+      if(err) return done(err);
+      if (!doc) {
+      return done(null, false, { message: 'Incorrect username.' });
+      }
+
+    if(doc){
+      bcrypt.compare(password, doc.password, (err, res) =>{
+        if(res == true) {
+          return done(null, {name: doc.userName, email: doc.userEmail})
+        }else {
+        return done(null, false, { message: 'Incorrect password.' });
+        }
+      });
+    }
+    });
+  }
+));
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '/dist', 'index.html'));
@@ -30,33 +69,33 @@ app.post('/signup', (req, res) => {
     if(doc){
       return res.send("Email already existed.");
     }else {
+ bcrypt.hash(password, saltRounds, function(err, hash) {
  const data = new account({
    userName,
    userEmail,
-   password
+   password: hash
  });
  data.save(err =>{
  if(err) return res.send("error saving to database.");
 });
+  req.login(userEmail, (err) => {
   return res.send(true);
+  });
+});
 }
 });
 });
 
-app.post('/login', (req, res) => {
-  account.findOne({ userEmail: req.body.userEmail }, (err, doc) =>{
-    if(err) return res.send("database is down.");
-    if (!doc) {
-      res.send("User not found please Sign up.");
-    }
-    if(doc){
-      if(doc.password == req.body.password){
-        res.send(true);
-      }else {
-        res.send("password is incorrect, please try again.")
-      }
-    }
-  });
+app.post('/login', passport.authenticate('local'),(req, res) => {
+   res.json(true);
+});
+
+passport.serializeUser(function(userEmail, done) {
+  done(null, userEmail);
+});
+
+passport.deserializeUser(function(userEmail, done) {
+    done(null, userEmail);
 });
 
 app.listen(process.env.PORT || 3000, ()=>{

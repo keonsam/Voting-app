@@ -32,7 +32,7 @@ export class Login extends React.Component{
         });
       }else {
         this.setState({
-          error: res
+          error: res.message
         });
       }
     });
