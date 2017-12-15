@@ -51,7 +51,7 @@ export class Signup extends React.Component{
          <input name="password" type="password" onChange={this.handleChange} value={this.state.password} required/>
          {this.state.error && <p id="error">{this.state.error}</p>}
          <button className="btn btn-success" type="sumbit">Sign Up</button>
-         { this.state.triggerRedirect && <Redirect to="/" /> }
+         { this.state.triggerRedirect && <Redirect to="/PollCreation" /> }
         </form>
      </div>
      <div className="col-1">

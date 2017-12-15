@@ -26,3 +26,9 @@ export function isAuth(callback) {
       callback(false);
     })
 }
+
+export function logout(callback) {
+  axios.get('/logout', res => {
+    callback(res.data);
+  });
+}

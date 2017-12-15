@@ -8,6 +8,7 @@ import { Body } from "./Body";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { Footer } from "./Footer";
+import {PollCreation} from "./PollCreation";
 
 export class App extends React.Component{
   constructor(props){
@@ -16,7 +17,7 @@ export class App extends React.Component{
       login: false,
       userName: '',
       userEmail: ''
-    }
+ }
 }
 
 componentDidMount() {
@@ -31,15 +32,17 @@ componentDidMount() {
  });
 }
 
+
   render() {
     return(
       <HashRouter>
-      <div className="container-fluid p-0">
+      <div >
         <Header login={this.state.login} userName={this.state.userName} />
         <Banner login={this.state.login} userEmail={this.state.userEmail} />
         <Route exact path="/" component={Body}/>
         <Route path="/Signup" component={Signup}/>
         <Route path="/Login" component={Login}/>
+        <Route path="/PollCreation" component={PollCreation}/>
         <Footer/>
       </div>
   </HashRouter>

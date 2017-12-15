@@ -74,7 +74,7 @@ app.get('/checkUser', (req, res) =>{
 app.get('/logout',(req, res) =>{
   req.logout();
   req.session.destory();
-  res.end();
+  res.redirect('/');
 });
 
 app.post('/signup', (req, res) => {
