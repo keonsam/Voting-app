@@ -9,7 +9,7 @@ export class Banner extends React.Component{
       <div className="text-center banner">
        <h2>Votex App</h2>
        <p>Free Custom Online Polls in just a few Clicks.</p>
-       <button className="btn btn-success">Sign up</button>
+       {!this.props.login && <button className="btn btn-success">Sign up</button>}
     </div>
     );
   }

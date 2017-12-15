@@ -61,6 +61,22 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '/dist', 'index.html'));
 });
 
+app.get('/checkUser', (req, res) =>{
+  if (req.isAuthenticated()){
+    const userName =req.session.passport.user.userName;
+    const userEmail = req.session.passport.user.userEmail;
+    res.send({userName, userEmail});
+  }else {
+    res.send(false)
+  };
+});
+
+app.get('/logout',(req, res) =>{
+  req.logout();
+  req.session.destory();
+  res.end();
+});
+
 app.post('/signup', (req, res) => {
   const userName = req.body.userName;
   const userEmail = req.body.userEmail;

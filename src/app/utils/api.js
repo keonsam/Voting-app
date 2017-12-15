@@ -15,3 +15,14 @@ export function login(userEmail, password, callback) {
     return callback(res.data);
   });
 }
+
+// auth login
+export function isAuth(callback) {
+  axios.get('/checkUser')
+    .then(res => {
+      callback(res.data);
+    })
+    .catch(err => {
+      callback(false);
+    })
+}
