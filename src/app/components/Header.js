@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import { logout } from '../utils/api';
 
 import { NavSignin } from './NavSignin';
 import { NavLogin } from './NavLogin';
@@ -7,7 +8,12 @@ import { NavLogin } from './NavLogin';
 export class Header extends React.Component {
   constructor(props){
   super(props);
+  this.state ={
+    reRender: false
+  }
+
 }
+
 render() {
   return (
     <nav className="navbar navbar-toggleable-sm navbar-light bg-faded">
@@ -22,7 +28,7 @@ render() {
     </li>
     </ul>
     {!this.props.login && <NavSignin />}
-    {this.props.login && <NavLogin userName={this.props.userName}/>}
+    {this.props.login && <NavLogin userName={this.props.userName} appUpdate={this.props.appUpdate}/>}
 </div>
 </nav>
   );

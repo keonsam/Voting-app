@@ -1,8 +1,6 @@
 import React from "react";
 import { Redirect} from "react-router-dom";
 
-import { login } from "../utils/api.js";
-
 export class Login extends React.Component{
   constructor(props){
     super(props);
@@ -27,6 +25,7 @@ export class Login extends React.Component{
     console.log('res');
     login(this.state.userEmail, this.state.password, (res) => {
       if(res == true) {
+        this.props.appUpdate();
         this.setState({
           triggerRedirect: true
         });

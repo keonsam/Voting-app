@@ -18,6 +18,24 @@ export class App extends React.Component{
       userName: '',
       userEmail: ''
  }
+ this.handleUpdate = this.handleUpdate.bind(this)
+}
+
+handleUpdate() {
+  isAuth(isAuthenticated =>{
+    console.log(isAuthenticated)
+    if(isAuthenticated){
+     this.setState({
+       login: true,
+       userName: isAuthenticated.userName,
+       userEmail: isAuthenticated.userEmail
+     });
+   }else{
+     this.setState({
+       login: false
+     })
+   }
+  });
 }
 
 componentDidMount() {
@@ -37,11 +55,11 @@ componentDidMount() {
     return(
       <HashRouter>
       <div >
-        <Header login={this.state.login} userName={this.state.userName} />
+        <Header login={this.state.login} userName={this.state.userName} appUpdate={this.handleUpdate}/>
         <Banner login={this.state.login} userEmail={this.state.userEmail} />
         <Route exact path="/" component={Body}/>
-        <Route path="/Signup" component={Signup}/>
-        <Route path="/Login" component={Login}/>
+        <Route path="/Signup"  render={() => <Signup appUpdate={this.handleUpdate}/> }/>
+        <Route path="/Login" render={() => <Login appUpdate={this.handleUpdate}/> }/>
         <Route path="/PollCreation" component={PollCreation}/>
         <Footer/>
       </div>

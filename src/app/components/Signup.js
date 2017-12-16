@@ -28,6 +28,7 @@ export class Signup extends React.Component{
         this.setState({
           triggerRedirect: true
         });
+        this.props.appUpdate();
       }else {
         this.setState({
           error: res

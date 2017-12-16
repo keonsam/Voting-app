@@ -12,7 +12,8 @@ export class NavLogin extends React.Component {
 }
 
 handleClick() {
- logout();
+ logout()
+ this.props.appUpdate();
  this.setState({
    triggerRedirect: true
  });

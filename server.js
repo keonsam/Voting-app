@@ -63,9 +63,7 @@ app.get('/', (req, res) => {
 
 app.get('/checkUser', (req, res) =>{
   if (req.isAuthenticated()){
-    const userName =req.session.passport.user.userName;
-    const userEmail = req.session.passport.user.userEmail;
-    res.send({userName, userEmail});
+    res.json({userName: req.session.passport.user.userName, userEmail:req.session.passport.user.userEmail});
   }else {
     res.send(false)
   };
@@ -73,8 +71,10 @@ app.get('/checkUser', (req, res) =>{
 
 app.get('/logout',(req, res) =>{
   req.logout();
-  req.session.destory();
-  res.redirect('/');
+  req.session.destroy(function (err) {
+    if (err) { return next(err); }
+    return res.send({ authenticated: req.isAuthenticated() });
+  });
 });
 
 app.post('/signup', (req, res) => {
@@ -95,7 +95,7 @@ app.post('/signup', (req, res) => {
  data.save(err =>{
  if(err) return res.send("error saving to database.");
 });
-  req.login(userEmail, (err) => {
+  req.login({userName, userEmail}, (err) => {
   return res.send(true);
   });
 });
@@ -104,7 +104,6 @@ app.post('/signup', (req, res) => {
 });
 
 app.post('/login', passport.authenticate('local', { failureRedirect: '/' }),(req, res) => {
-  console.log(req.message);
    res.json(true);
 });
 
