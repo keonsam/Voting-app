@@ -1,6 +1,8 @@
 import React from "react";
 import { Redirect} from "react-router-dom";
 
+import { login } from "../utils/api";
+
 export class Login extends React.Component{
   constructor(props){
     super(props);

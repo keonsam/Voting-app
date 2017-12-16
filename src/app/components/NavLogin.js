@@ -12,11 +12,12 @@ export class NavLogin extends React.Component {
 }
 
 handleClick() {
- logout()
- this.props.appUpdate();
+logout(()=>{
+this.props.appUpdate();
  this.setState({
    triggerRedirect: true
  });
+});
 }
 
 render() {

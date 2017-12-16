@@ -8,10 +8,6 @@ import { NavLogin } from './NavLogin';
 export class Header extends React.Component {
   constructor(props){
   super(props);
-  this.state ={
-    reRender: false
-  }
-
 }
 
 render() {
