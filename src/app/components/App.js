@@ -9,6 +9,7 @@ import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { Footer } from "./Footer";
 import {PollCreation} from "./PollCreation";
+import {EditPoll} from "./EditPoll";
 
 export class App extends React.Component{
   constructor(props){
@@ -61,6 +62,7 @@ componentDidMount() {
         <Route path="/Signup"  render={() => <Signup appUpdate={this.handleUpdate}/> }/>
         <Route path="/Login" render={() => <Login appUpdate={this.handleUpdate}/> }/>
         <Route path="/PollCreation" component={PollCreation}/>
+        <Route path="/EditPoll" component={EditPoll}/>
         <Footer/>
       </div>
   </HashRouter>

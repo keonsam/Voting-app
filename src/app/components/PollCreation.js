@@ -21,8 +21,9 @@ export class PollCreation extends React.Component{
  }
  render() {
    return (
-     <div className="jumbotron ng-scope">
-     <h1>Create your Poll!</h1>
+     <div className="container">
+     <div className="jumbotron">
+     <h4>Create your Poll!</h4>
      <form onSubmit={this.onSubmit}>
      <label htmlFor="Enter Title">Title:</label>
      <br/>
@@ -34,6 +35,7 @@ export class PollCreation extends React.Component{
      <br/>
      <button className="btn btn-primary" type="submit">Create Poll</button>
      </form>
+     </div>
      </div>
    );
  }

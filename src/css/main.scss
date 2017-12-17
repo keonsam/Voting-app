@@ -13,7 +13,18 @@ html,body {
   background-color: #e7e7e7 !important;
 
 }
-
+.jumbotron {
+  margin: {
+    top: 2vh;
+    bottom: 2vh;
+  }
+  li {
+    background: white;
+    padding: .7em;
+    border-radius: 10px;
+    margin: .3em;
+  }
+}
 .banner {
   background-color: $blue;
   color: white;
