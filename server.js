@@ -16,6 +16,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const account = require('./models/accounts');
+const chart = require('./models/charts');
 
 const VIEWS = path.join(__dirname, '/dist');
 
@@ -105,6 +106,36 @@ app.post('/signup', (req, res) => {
 
 app.post('/login', passport.authenticate('local', { failureRedirect: '/' }),(req, res) => {
    res.json(true);
+});
+
+app.post('/postChart',(req, res) => {
+  const userEmail = req.body.userEmail;
+  const title = req.body.title;
+  const data = req.body.data;
+  const colors = req.body.colors;
+  const dataChart  = new chart({
+    userEmail,
+    title,
+    data,
+    value: [],
+    colors
+  });
+  dataChart.save((err,rec) =>{
+    if(err) return res.send("error saving to database");
+    if(!err) {
+      return res.send(rec._id);
+    }
+  });
+});
+
+app.post('getChart',(req, res) =>{
+  chart.findOne({_id: req.body.id},(err,doc)=>{
+    if(err) res.send("database is down please try again later.");
+    if(doc) {
+      onsole.log(doc);
+      return res.json(doc);
+    }
+  });
 });
 
 passport.serializeUser(function(userEmail, done) {

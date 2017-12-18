@@ -10,6 +10,7 @@ import { Login } from "./Login";
 import { Footer } from "./Footer";
 import {PollCreation} from "./PollCreation";
 import {EditPoll} from "./EditPoll";
+import { Chart} from "./Chart";
 
 export class App extends React.Component{
   constructor(props){
@@ -19,12 +20,11 @@ export class App extends React.Component{
       userName: '',
       userEmail: ''
  }
- this.handleUpdate = this.handleUpdate.bind(this)
+ this.handleUpdate = this.handleUpdate.bind(this);
 }
 
 handleUpdate() {
   isAuth(isAuthenticated =>{
-    console.log(isAuthenticated)
     if(isAuthenticated){
      this.setState({
        login: true,
@@ -51,7 +51,6 @@ componentDidMount() {
  });
 }
 
-
   render() {
     return(
       <HashRouter>
@@ -61,8 +60,9 @@ componentDidMount() {
         <Route exact path="/" component={Body}/>
         <Route path="/Signup"  render={() => <Signup appUpdate={this.handleUpdate}/> }/>
         <Route path="/Login" render={() => <Login appUpdate={this.handleUpdate}/> }/>
-        <Route path="/PollCreation" component={PollCreation}/>
-        <Route path="/EditPoll" component={EditPoll}/>
+        <Route path="/PollCreation" render={() => <PollCreation /> }/>
+        <Route path="/EditPoll" render={() => <EditPoll userEmail={this.state.userEmail}/> }/>
+        <Route path="/Chart/:id" component={Chart}/>
         <Footer/>
       </div>
   </HashRouter>
