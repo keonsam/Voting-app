@@ -10,7 +10,7 @@ import { Login } from "./Login";
 import { Footer } from "./Footer";
 import {PollCreation} from "./PollCreation";
 import {EditPoll} from "./EditPoll";
-import { Chart} from "./Chart";
+import { ChartTab} from "./Chart";
 
 export class App extends React.Component{
   constructor(props){
@@ -62,7 +62,7 @@ componentDidMount() {
         <Route path="/Login" render={() => <Login appUpdate={this.handleUpdate}/> }/>
         <Route path="/PollCreation" render={() => <PollCreation /> }/>
         <Route path="/EditPoll" render={() => <EditPoll userEmail={this.state.userEmail}/> }/>
-        <Route path="/Chart/:id" component={Chart}/>
+        <Route path="/Chart/:id" component={ChartTab}/>
         <Footer/>
       </div>
   </HashRouter>

@@ -43,7 +43,14 @@ export function postChart(userEmail, title, data, colors, callback) {
 export function getChart(id, callback){
   axios.post('/getChart',{id})
   .then(res => {
-    
+
     return callback(res.data);
   })
+}
+
+export function postValue(id, index, callback){
+  axios.put('/postValue',{id,index})
+  .then(res => {
+    return callback(res.data);
+  });
 }

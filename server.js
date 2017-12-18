@@ -113,15 +113,16 @@ app.post('/postChart',(req, res) => {
   const title = req.body.title;
   const data = req.body.data;
   const colors = req.body.colors;
+  const value = Array(data.length).fill(0);
   const dataChart  = new chart({
     userEmail,
     title,
     data,
-    value: [],
+    value,
     colors
   });
   dataChart.save((err,rec) =>{
-    if(err) return res.send("error saving to database");
+    if(err) res.send("error saving to database");
     if(!err) {
       return res.send(rec._id);
     }
@@ -135,6 +136,20 @@ app.post('/getChart',(req, res) =>{
       return res.json(doc);
     }
   });
+});
+
+app.put('/postValue',(req, res)=>{
+  const index = Number(req.body.index);
+  chart.findOne({_id: req.body.id},(err,doc)=>{
+if(err) res.send(err);
+if(doc) {
+const index = Number(req.body.index);
+console.log(doc.value);
+doc.value.set(index, doc.value[index]+1);
+doc.save()
+res.send(true)
+}
+});
 });
 
 passport.serializeUser(function(userEmail, done) {

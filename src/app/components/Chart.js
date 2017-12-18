@@ -1,35 +1,57 @@
 import React from "react";
+import {Chart} from "chart.js";
 import {Doughnut} from 'react-chartjs-2';
 
 import { getChart } from '../utils/api';
+import { postValue } from '../utils/api';
 
-export class Chart extends React.Component{
+export class ChartTab extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      index: 0,
       title: '',
-      chartData: {}
+      refresh: false,
+      chartData: {
+        labels: [],
+        datesets: [],
+      }
     }
-    this.handleClick = this.handleClick.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   getChartData() {
     getChart(this.props.match.params.id, (res)=> {
+      console.log("testing");
+      console.log(res);
       this.setState({
         title: res.title,
         chartData: {
-          labels: [res.data],
+          labels: res.data,
           datesets: [{
             label: 'Votes',
-            data: [res.value],
-            backgroundColor: [res.colors]
+            data: res.value,
+            backgroundColor: res.colors
           }],
         }
       });
     });
+    console.log(this.state.chartData.datesets.data)
   }
 
-  handleClick(e){
-  console.log("ok")
+  handleChange(e) {
+  this.setState({
+    index: e.target.value
+  });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    postValue(this.props.match.params.id,this.state.index,(res)=>{
+      this.setState({
+        refresh: true
+      });
+    });
   }
 
   componentWillMount() {
@@ -41,13 +63,18 @@ export class Chart extends React.Component{
       <div className="container">
       <div className="jumbotron row">
       <div className="col-4">
-      <select>
-      {this.state.chartData.labels.map((data, i)=>{
+      <form onSubmit={this.onSubmit}>
+      <select onChange={this.handleChange}>
+      {
+      this.state.chartData.labels.map((data, i)=>{
         return (
-          <option key={i} id={i} value={data} onClick={this.handleClick}>{data}</option>
+          <option key={i} id={i} value={i}>{data}</option>
         );
-      })}
+      })
+    }
       </select>
+      <button className="btn btn-primary" type="submit">Submit</button>
+      </form>
       </div>
       <div className="col-8">
       <Doughnut data={this.state.chartData}
