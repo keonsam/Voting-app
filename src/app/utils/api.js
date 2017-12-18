@@ -41,10 +41,9 @@ export function postChart(userEmail, title, data, colors, callback) {
 }
 
 export function getChart(id, callback){
-  console.log(id);
   axios.post('/getChart',{id})
   .then(res => {
-    console.log(res.data)
+    
     return callback(res.data);
   })
 }

@@ -13,9 +13,7 @@ export class Chart extends React.Component{
     this.handleClick = this.handleClick.bind(this);
   }
   getChartData() {
-    console.log("getChartDataworking");
-    getChart(this.props.params.id, (res)=> {
-     console.log("client working");
+    getChart(this.props.match.params.id, (res)=> {
       this.setState({
         title: res.title,
         chartData: {
@@ -31,11 +29,10 @@ export class Chart extends React.Component{
   }
 
   handleClick(e){
-
+  console.log("ok")
   }
 
   componentWillMount() {
-    console.log(this.props.params.id);
   this.getChartData();
   }
 

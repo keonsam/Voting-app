@@ -128,11 +128,10 @@ app.post('/postChart',(req, res) => {
   });
 });
 
-app.post('getChart',(req, res) =>{
+app.post('/getChart',(req, res) =>{
   chart.findOne({_id: req.body.id},(err,doc)=>{
     if(err) res.send("database is down please try again later.");
     if(doc) {
-      onsole.log(doc);
       return res.json(doc);
     }
   });
