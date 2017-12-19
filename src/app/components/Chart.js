@@ -14,7 +14,7 @@ export class ChartTab extends React.Component{
       refresh: false,
       chartData: {
         labels: [],
-        datesets: [],
+        datasets: [],
       }
     }
     this.onSubmit = this.onSubmit.bind(this);
@@ -28,7 +28,7 @@ export class ChartTab extends React.Component{
         title: res.title,
         chartData: {
           labels: res.data,
-          datesets: [{
+          datasets: [{
             label: 'Votes',
             data: res.value,
             backgroundColor: res.colors
@@ -36,7 +36,7 @@ export class ChartTab extends React.Component{
         }
       });
     });
-    console.log(this.state.chartData.datesets.data)
+    console.log(this.state.chartData);
   }
 
   handleChange(e) {
@@ -54,7 +54,7 @@ export class ChartTab extends React.Component{
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
   this.getChartData();
   }
 
