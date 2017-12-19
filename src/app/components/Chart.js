@@ -34,7 +34,6 @@ export class ChartTab extends React.Component{
         }
       });
     });
-    console.log(this.state.chartData);
   }
 
   handleChange(e) {
@@ -61,7 +60,7 @@ export class ChartTab extends React.Component{
       <div className="jumbotron row">
       <div className="col-12 col-sm-12 col-lg-5 text-center">
       <form onSubmit={this.onSubmit}>
-      <label htmlFor="options">Choose option:</label><br/>
+      <label htmlFor="options">Choose Your Option:</label><br/>
       <select onChange={this.handleChange}>
       {
       this.state.chartData.labels.map((data, i)=>{
