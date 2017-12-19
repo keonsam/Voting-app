@@ -22,8 +22,6 @@ export class ChartTab extends React.Component{
   }
   getChartData() {
     getChart(this.props.match.params.id, (res)=> {
-      console.log("testing");
-      console.log(res);
       this.setState({
         title: res.title,
         chartData: {
@@ -60,10 +58,10 @@ export class ChartTab extends React.Component{
 
   render() {
     return (
-      <div className="container">
       <div className="jumbotron row">
-      <div className="col-4">
+      <div className="col-12 col-sm-12 col-lg-5 text-center">
       <form onSubmit={this.onSubmit}>
+      <label htmlFor="options">Choose option:</label><br/>
       <select onChange={this.handleChange}>
       {
       this.state.chartData.labels.map((data, i)=>{
@@ -72,11 +70,11 @@ export class ChartTab extends React.Component{
         );
       })
     }
-      </select>
+      </select><br/>
       <button className="btn btn-primary" type="submit">Submit</button>
       </form>
       </div>
-      <div className="col-8">
+      <div className="col-12 col-sm-12 col-lg-7">
       <Doughnut data={this.state.chartData}
       options={{
         title: {
@@ -86,11 +84,9 @@ export class ChartTab extends React.Component{
         },
         legend: {
           position: "bottom"
-        },
-      		maintainAspectRatio: false
+        }
       	}}
       />
-      </div>
       </div>
       </div>
     );

@@ -139,12 +139,10 @@ app.post('/getChart',(req, res) =>{
 });
 
 app.put('/postValue',(req, res)=>{
-  const index = Number(req.body.index);
   chart.findOne({_id: req.body.id},(err,doc)=>{
 if(err) res.send(err);
 if(doc) {
 const index = Number(req.body.index);
-console.log(doc.value);
 doc.value.set(index, doc.value[index]+1);
 doc.save()
 res.send(true)
@@ -152,6 +150,19 @@ res.send(true)
 });
 });
 
+app.post('/getChartItems',(req,res)=>{
+  chart.find({userEmail: req.body.userEmail},(err,doc)=>{
+    if(err) res.send(err);
+    if(doc) res.send(doc);
+  });
+});
+
+app.get('/getAllPolls',(req,res) =>{
+  chart.find({},(err,doc)=>{
+    if(err) res.send(err);
+    if(doc) res.send(doc);
+  });
+});
 passport.serializeUser(function(userEmail, done) {
   done(null, userEmail);
 });

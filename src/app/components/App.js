@@ -54,15 +54,17 @@ componentDidMount() {
   render() {
     return(
       <HashRouter>
-      <div >
+      <div>
+      <div className="content">
         <Header login={this.state.login} userName={this.state.userName} appUpdate={this.handleUpdate}/>
         <Banner login={this.state.login} userEmail={this.state.userEmail} />
         <Route exact path="/" component={Body}/>
         <Route path="/Signup"  render={() => <Signup appUpdate={this.handleUpdate}/> }/>
         <Route path="/Login" render={() => <Login appUpdate={this.handleUpdate}/> }/>
-        <Route path="/PollCreation" render={() => <PollCreation /> }/>
+        <Route path="/PollCreation" render={() => <PollCreation userEmail={this.state.userEmail}/> }/>
         <Route path="/EditPoll" render={() => <EditPoll userEmail={this.state.userEmail}/> }/>
         <Route path="/Chart/:id" component={ChartTab}/>
+        </div>
         <Footer/>
       </div>
   </HashRouter>

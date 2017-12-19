@@ -54,3 +54,17 @@ export function postValue(id, index, callback){
     return callback(res.data);
   });
 }
+
+export function getChartItems(userEmail, callback){
+  axios.post('/getChartItems',{userEmail})
+  .then(res =>{
+    return callback(res.data);
+  });
+}
+
+export function getAllPolls(callback){
+  axios.get('/getAllPolls')
+  .then(res =>{
+    return callback(res.data);
+  });
+}

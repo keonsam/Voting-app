@@ -26,7 +26,7 @@ export class PollCreation extends React.Component{
    e.preventDefault();
    const options = this.state.options.split(",");
    const colors = this.state.colors.split(",")
-   postChart(this.state.userEmail,this.state.title, options, colors, (res)=> {
+   postChart(this.props.userEmail,this.state.title, options, colors, (res)=> {
      if(res) {
        this.setState({
          id: res,
