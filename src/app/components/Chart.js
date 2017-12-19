@@ -21,7 +21,6 @@ export class ChartTab extends React.Component{
   }
   getChartData() {
     getChart(this.props.match.params.id, (res)=> {
-      console.log('working');
       this.setState({
         title: res.title,
         chartData: {
@@ -54,6 +53,7 @@ export class ChartTab extends React.Component{
   }
 
   render() {
+   console.log(this.state.chartData);
     return (
       <div className="jumbotron row">
       <div className="col-12 col-sm-12 col-lg-5 text-center">
