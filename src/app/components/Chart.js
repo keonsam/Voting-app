@@ -11,7 +11,6 @@ export class ChartTab extends React.Component{
     this.state = {
       index: 0,
       title: '',
-      refresh: false,
       chartData: {
         labels: [],
         datasets: [],
@@ -22,6 +21,7 @@ export class ChartTab extends React.Component{
   }
   getChartData() {
     getChart(this.props.match.params.id, (res)=> {
+      console.log('working');
       this.setState({
         title: res.title,
         chartData: {
@@ -45,9 +45,7 @@ export class ChartTab extends React.Component{
   onSubmit(e) {
     e.preventDefault();
     postValue(this.props.match.params.id,this.state.index,(res)=>{
-      this.setState({
-        refresh: true
-      });
+      this.getChartData();
     });
   }
 
